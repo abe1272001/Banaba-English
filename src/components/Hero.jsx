@@ -28,7 +28,9 @@ export default function Hero() {
 
 	return (
 		<React.Fragment>
-			<section className={classes.hero}>Hero</section>
+			<section id="toolbar" className={classes.hero}>
+				Hero
+			</section>
 		</React.Fragment>
 	);
 }

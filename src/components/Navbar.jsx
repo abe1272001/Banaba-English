@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
 		flexGrow: 1,
 	},
 	menuButton: {
-		marginRight: theme.spacing(2),
+		// marginRight: theme.spacing(2),
 	},
 	title: {
 		flexGrow: 1,
@@ -39,6 +39,7 @@ function Navbar(props) {
 	};
 	const { forwardedRef } = props;
 
+	//color="transparent" 加在 AppBar 上會變透明
 	return (
 		<AppBar ref={forwardedRef} className={classes.height}>
 			<Toolbar>
