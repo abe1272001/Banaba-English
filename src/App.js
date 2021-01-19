@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './styles/app.scss';
 import { makeStyles } from '@material-ui/core/styles';
-import { useTheme } from '@material-ui/core/styles';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Button from '@material-ui/core/Button';
@@ -27,7 +26,7 @@ function HideOnScroll(props) {
 }
 
 // App styles
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
 	root: {
 		background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
 		border: 0,
@@ -37,7 +36,7 @@ const useStyles = makeStyles({
 		height: 48,
 		padding: '0 30px',
 	},
-});
+}));
 
 const defaultProps = {
 	bgcolor: 'background.paper',
@@ -48,7 +47,7 @@ const defaultProps = {
 
 function App(props) {
 	const classes = useStyles();
-	const theme = useTheme();
+	// const theme = useTheme();
 
 	return (
 		<div className="App">
@@ -56,7 +55,7 @@ function App(props) {
 			<HideOnScroll {...props}>
 				<Navbar />
 			</HideOnScroll>
-			<Hero />
+			<Hero className={classes.mt10vh} />
 
 			<Container>
 				<Box my={2}>
