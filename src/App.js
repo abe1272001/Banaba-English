@@ -1,29 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import './styles/app.scss';
 import { makeStyles } from '@material-ui/core/styles';
-import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Button from '@material-ui/core/Button';
 import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
-import Slide from '@material-ui/core/Slide';
-
+import RightSidebar from './components/RightSidebar';
+import path from './utils/path';
 // Navbar 滾動隱藏
-function HideOnScroll(props) {
-	const { children, window } = props;
-	// Note that you normally won't need to set the window ref as useScrollTrigger
-	// will default to window.
-	// This is only being set here because the demo is in an iframe.
-	const trigger = useScrollTrigger({ target: window ? window() : undefined });
+// const HideOnScroll = React.forwardRef((props, ref) => {
+// 	const { children } = props;
 
-	return (
-		<Slide appear={false} direction="down" in={!trigger}>
-			{children}
-		</Slide>
-	);
-}
+// 	const trigger = useScrollTrigger();
+
+// 	return (
+// 		<Slide appear={false} direction="down" in={!trigger} ref={ref}>
+// 			{children}
+// 		</Slide>
+// 	);
+// });
 
 // App styles
 const useStyles = makeStyles((theme) => ({
@@ -47,16 +44,27 @@ const defaultProps = {
 
 function App(props) {
 	const classes = useStyles();
-	// const theme = useTheme();
+	// const urlPath = path();
+
+	const [open, setOpen] = useState(false);
+	const toggleDrawer = (open) => (event) => {
+		if (
+			event &&
+			event.type === 'keydown' &&
+			(event.key === 'Tab' || event.key === 'Shift')
+		) {
+			return;
+		}
+
+		setOpen(!open);
+	};
 
 	return (
 		<div className="App">
 			<CssBaseline />
-			<HideOnScroll {...props}>
-				<Navbar />
-			</HideOnScroll>
+			<Navbar toggleDrawer={toggleDrawer} open={open} />
+			<RightSidebar open={open} toggleDrawer={toggleDrawer} />
 			<Hero className={classes.mt10vh} />
-
 			<Container>
 				<Box my={2}>
 					{[...new Array(12)]
